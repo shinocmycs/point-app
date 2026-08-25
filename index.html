@@ -57,7 +57,7 @@
         <label id="monthlyInputField" class="hidden">希望月額リース料<input id="targetMonthly" inputmode="numeric" type="number" min="0" step="100" value="0"></label>
         <label id="termField">リース期間<select id="leaseTerm"><option value="84">7年</option><option value="72">6年</option><option value="60" selected>5年</option><option value="48">4年</option><option value="36">3年</option></select></label>
         <label id="rateField">リース料率（%）<input id="leaseRate" inputmode="decimal" type="number" min="0" step="0.01" value="2.28"></label>
-        <label>下取り<input id="tradeIn" inputmode="numeric" type="number" min="0" step="1000" value="0"></label>
+        <label>下取り区分<select id="tradeInType"><option value="none">① なし（ポイント影響なし）</option><option value="own">② あり（自社機・＋5ポイント）</option><option value="other">③ あり（他社機・＋10後に×1.2）</option></select></label>
         <label>内金（手付金）<input id="deposit" inputmode="numeric" type="number" min="0" step="1000" value="0"></label>
         <label>立替金<input id="advance" inputmode="numeric" type="number" min="0" step="1000" value="0"></label>
         <label>その他サービス売<input id="serviceSale" inputmode="numeric" type="number" min="0" step="1000" value="0"></label>
