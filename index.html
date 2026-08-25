@@ -61,7 +61,7 @@
         <label id="directionField">計算方法<select id="calculationMode"><option value="salesToLease">売金から計算</option><option value="leaseToSales">リース料から逆算</option></select></label>
         <label id="companyField">リース会社<select id="leaseCompany"><option value="">未選択</option><option>シャープファイナンス</option><option>クレディセゾン（インボイス前）</option><option>クレディセゾン（インボイス後）</option><option>トラストパナ</option><option>三井住友</option><option>NECキャピタル</option><option>NTT TC</option><option>オリックス</option><option>リコー</option><option>オリコ（ローン）</option><option>オリコ（リース）</option><option>セディナ</option><option>三菱HCビジネス</option><option>JA三井リース</option><option>アプラス</option></select></label>
         <label>売金（税別・サービス売控除前）<input id="salesPrice" inputmode="numeric" type="number" min="0" step="1000"></label>
-        <label id="monthlyInputField" class="hidden">希望月額リース料<input id="targetMonthly" inputmode="numeric" type="number" min="0" step="100" value="0"></label>
+        <label id="monthlyInputField">希望月額リース料（逆算時）<input id="targetMonthly" inputmode="numeric" type="number" min="0" step="100" value="0"></label>
         <label id="termField">リース期間<select id="leaseTerm"><option value="84">7年</option><option value="72">6年</option><option value="60" selected>5年</option><option value="48">4年</option><option value="36">3年</option></select></label>
         <label id="rateField">リース料率（%）<input id="leaseRate" inputmode="decimal" type="number" min="0" step="0.01" value="2.28"></label>
         <label>下取り区分<select id="tradeInType"><option value="none">① なし（ポイント影響なし）</option><option value="own">② あり（自社機・＋5ポイント）</option><option value="own3">③ あり（自社機・＋3ポイント）</option><option value="other">④ あり（他社機・＋10後に×1.2）</option></select></label>
@@ -109,7 +109,7 @@
       <p class="note">元Excelの計算マスタを使用。表示額は入力条件に基づく計算値です。</p>
     </section>
   </main>
-  <footer>商品マスタ更新：2026年8月3日版｜アプリ v24</footer>
+  <footer>商品マスタ更新：2026年8月3日版｜アプリ v25</footer>
   <script src="app.js" defer></script>
 </body>
 </html>
