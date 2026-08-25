@@ -59,6 +59,7 @@
       <div class="field-grid">
         <label>契約区分<select id="contractType"><option value="lease">リース</option><option value="cash">現金</option></select></label>
         <label id="directionField">計算方法<select id="calculationMode"><option value="salesToLease">売金から計算</option><option value="leaseToSales">リース料から逆算</option></select></label>
+        <label id="companyField">リース会社<select id="leaseCompany"><option value="">未選択</option><option>シャープファイナンス</option><option>クレディセゾン（インボイス前）</option><option>クレディセゾン（インボイス後）</option><option>トラストパナ</option><option>三井住友</option><option>NECキャピタル</option><option>NTT TC</option><option>オリックス</option><option>リコー</option><option>オリコ（ローン）</option><option>オリコ（リース）</option><option>セディナ</option><option>三菱HCビジネス</option><option>JA三井リース</option><option>アプラス</option></select></label>
         <label>売金（税別・サービス売控除前）<input id="salesPrice" inputmode="numeric" type="number" min="0" step="1000"></label>
         <label id="monthlyInputField" class="hidden">希望月額リース料<input id="targetMonthly" inputmode="numeric" type="number" min="0" step="100" value="0"></label>
         <label id="termField">リース期間<select id="leaseTerm"><option value="84">7年</option><option value="72">6年</option><option value="60" selected>5年</option><option value="48">4年</option><option value="36">3年</option></select></label>
