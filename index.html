@@ -59,7 +59,7 @@
       <div class="field-grid">
         <label>契約区分<select id="contractType"><option value="lease">リース</option><option value="cash">現金</option></select></label>
         <label id="directionField">計算方法<select id="calculationMode"><option value="salesToLease">売金から計算</option><option value="leaseToSales">リース料から逆算</option></select></label>
-        <label>営業売金（税別）<input id="salesPrice" inputmode="numeric" type="number" min="0" step="1000"></label>
+        <label>売金（税別・サービス売控除前）<input id="salesPrice" inputmode="numeric" type="number" min="0" step="1000"></label>
         <label id="monthlyInputField" class="hidden">希望月額リース料<input id="targetMonthly" inputmode="numeric" type="number" min="0" step="100" value="0"></label>
         <label id="termField">リース期間<select id="leaseTerm"><option value="84">7年</option><option value="72">6年</option><option value="60" selected>5年</option><option value="48">4年</option><option value="36">3年</option></select></label>
         <label id="rateField">リース料率（%）<input id="leaseRate" inputmode="decimal" type="number" min="0" step="0.01" value="2.28"></label>
@@ -69,21 +69,19 @@
         <label>その他サービス売<input id="serviceSale" inputmode="numeric" type="number" min="0" step="1000" value="0"></label>
       </div>
       <details id="daibenPanel" class="daiben-panel">
-        <summary><span><b>代弁を計算</b><small>旧リース解約金を新契約へ反映</small></span></summary>
+        <summary><span><b>代弁を計算</b><small>レベルアップ／単純解約を新契約へ反映</small></span></summary>
         <div class="daiben-body">
-          <label>処理区分<select id="daibenMode"><option value="none">代弁なし</option><option value="normal">通常（インボイス対象）</option><option value="excluded">インボイス対象外</option><option value="simple">単純解約</option></select></label>
+          <label>処理区分<select id="daibenMode"><option value="none">代弁なし</option><option value="levelup">① レベルアップ（残額×1.1）</option><option value="simple">② 単純解約</option></select></label>
           <label>代弁料率（%）<input id="daibenRate" inputmode="decimal" type="number" min="0" step="0.01" value="2.00"></label>
           <p class="subheading">旧リース①</p>
-          <div class="field-grid triple">
+          <div class="field-grid">
             <label>月額（税別）<input id="oldMonthly1" inputmode="numeric" type="number" min="0" step="100" value="0"></label>
             <label>残回数<input id="oldMonths1" inputmode="numeric" type="number" min="0" step="1" value="0"></label>
-            <label>当時の税率（%）<input id="oldTax1" inputmode="decimal" type="number" min="0" step="1" value="10"></label>
           </div>
           <p class="subheading">旧リース②</p>
-          <div class="field-grid triple">
+          <div class="field-grid">
             <label>月額（税別）<input id="oldMonthly2" inputmode="numeric" type="number" min="0" step="100" value="0"></label>
             <label>残回数<input id="oldMonths2" inputmode="numeric" type="number" min="0" step="1" value="0"></label>
-            <label>当時の税率（%）<input id="oldTax2" inputmode="decimal" type="number" min="0" step="1" value="10"></label>
           </div>
           <div class="daiben-preview">
             <div><span>旧契約解約金</span><strong id="oldCancelTotal">¥0</strong></div>
