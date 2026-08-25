@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#164e63">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="ポイント計算">
+  <title>商品・ポイント計算</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="daiben.css">
+</head>
+<body>
+  <header class="topbar">
+    <div><p class="eyebrow">SALES CALCULATOR</p><h1>商品・ポイント計算</h1></div>
+    <button id="resetBtn" class="icon-button" type="button">リセット</button>
+  </header>
+  <main>
+    <nav id="categories" class="category-strip" aria-label="商品カテゴリ"></nav>
+
+    <section class="hero-card" aria-live="polite">
+      <div><p class="muted">獲得ポイント</p><strong id="totalPoints" class="big-number">0</strong><span class="unit"> pt</span></div>
+      <div class="hero-side"><p class="muted">売金（税込）</p><strong id="heroSales">¥0</strong></div>
+    </section>
+
+    <section class="card">
+      <div class="section-heading"><div><p class="step">STEP 1</p><h2>商品を選ぶ</h2></div><span id="productCount" class="count"></span></div>
+      <label for="productSearch">商品名・品番で検索</label>
+      <input id="productSearch" type="search" placeholder="例：C251i / NYC-X" autocomplete="off">
+      <label for="productSelect">商品</label>
+      <select id="productSelect"></select>
+      <div id="productMeta" class="product-meta"></div>
+      <button id="addProduct" class="primary" type="button">商品を追加</button>
+    </section>
+
+    <section id="linesSection" class="card hidden">
+      <div class="section-heading"><div><p class="step">STEP 2</p><h2>数量を調整</h2></div></div>
+      <div id="lines" class="lines"></div>
+    </section>
+
+    <section class="card">
+      <div class="section-heading"><div><p class="step">OPTION</p><h2>オプション・サービス</h2></div></div>
+      <label for="extraSelect">追加項目</label>
+      <select id="extraSelect"></select>
+      <button id="addExtra" class="secondary" type="button">追加項目を加える</button>
+      <div id="extras" class="lines compact"></div>
+    </section>
+
+    <section class="card">
+      <div class="section-heading"><div><p class="step">STEP 3</p><h2>売金と契約条件</h2></div></div>
+      <div class="field-grid">
+        <label>契約区分<select id="contractType"><option value="lease">リース</option><option value="cash">現金</option></select></label>
+        <label id="directionField">計算方法<select id="calculationMode"><option value="salesToLease">売金から計算</option><option value="leaseToSales">リース料から逆算</option></select></label>
+        <label>売金（税込）<input id="salesPrice" inputmode="numeric" type="number" min="0" step="1000"></label>
+        <label id="monthlyInputField" class="hidden">希望月額リース料<input id="targetMonthly" inputmode="numeric" type="number" min="0" step="100" value="0"></label>
+        <label id="termField">リース期間<select id="leaseTerm"><option value="84">7年</option><option value="72">6年</option><option value="60" selected>5年</option><option value="48">4年</option><option value="36">3年</option></select></label>
+        <label id="rateField">リース料率（%）<input id="leaseRate" inputmode="decimal" type="number" min="0" step="0.01" value="1.86"></label>
+        <label>下取り<input id="tradeIn" inputmode="numeric" type="number" min="0" step="1000" value="0"></label>
+        <label>内金（手付金）<input id="deposit" inputmode="numeric" type="number" min="0" step="1000" value="0"></label>
+        <label>立替金<input id="advance" inputmode="numeric" type="number" min="0" step="1000" value="0"></label>
+        <label>その他サービス売<input id="serviceSale" inputmode="numeric" type="number" min="0" step="1000" value="0"></label>
+      </div>
+      <details id="daibenPanel" class="daiben-panel">
+        <summary><span><b>代弁を計算</b><small>旧リース解約金を新契約へ反映</small></span></summary>
+        <div class="daiben-body">
+          <label>処理区分<select id="daibenMode"><option value="none">代弁なし</option><option value="normal">通常（インボイス対象）</option><option value="excluded">インボイス対象外</option><option value="simple">単純解約</option></select></label>
+          <label>代弁料率（%）<input id="daibenRate" inputmode="decimal" type="number" min="0" step="0.01" value="2.00"></label>
+          <p class="subheading">旧リース①</p>
+          <div class="field-grid triple">
+            <label>月額（税別）<input id="oldMonthly1" inputmode="numeric" type="number" min="0" step="100" value="0"></label>
+            <label>残回数<input id="oldMonths1" inputmode="numeric" type="number" min="0" step="1" value="0"></label>
+            <label>当時の税率（%）<input id="oldTax1" inputmode="decimal" type="number" min="0" step="1" value="10"></label>
+          </div>
+          <p class="subheading">旧リース②</p>
+          <div class="field-grid triple">
+            <label>月額（税別）<input id="oldMonthly2" inputmode="numeric" type="number" min="0" step="100" value="0"></label>
+            <label>残回数<input id="oldMonths2" inputmode="numeric" type="number" min="0" step="1" value="0"></label>
+            <label>当時の税率（%）<input id="oldTax2" inputmode="decimal" type="number" min="0" step="1" value="10"></label>
+          </div>
+          <div class="daiben-preview">
+            <div><span>旧契約解約金</span><strong id="oldCancelTotal">¥0</strong></div>
+            <div><span>代弁①</span><strong id="daiben1">¥0</strong></div>
+            <div><span>代弁②</span><strong id="daiben2">¥0</strong></div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section class="result-card">
+      <p class="step light">CALCULATION</p><h2>計算結果</h2>
+      <dl>
+        <div><dt>商品・OP合計</dt><dd id="subtotal">¥0</dd></div>
+        <div><dt>正味決済額</dt><dd id="netPayment">¥0</dd></div>
+        <div id="daibenRow" class="hidden"><dt>代弁合計（リースに乗る額）</dt><dd id="daibenTotal">¥0</dd></div>
+        <div id="monthlyRow"><dt>月額リース料（概算）</dt><dd id="monthlyLease">¥0</dd></div>
+        <div class="accent"><dt>ポイント</dt><dd id="resultPoints">0 pt</dd></div>
+      </dl>
+      <p class="note">元Excelの計算マスタを使用。表示額は入力条件に基づく計算値です。</p>
+    </section>
+  </main>
+  <footer>商品マスタ更新：2026年8月3日版</footer>
+  <script src="app.js" defer></script>
+</body>
+</html>
